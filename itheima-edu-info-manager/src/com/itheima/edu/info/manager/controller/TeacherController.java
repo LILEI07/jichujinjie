@@ -50,27 +50,27 @@ public class TeacherController {
 
     private void retrieveTeacher() {
         Teacher[] teachs = teacherService.allTeachers();
-        int index = -1;
+        boolean isnull = arrIsNull();
+        if (isnull) {
+            System.out.println("当前系统中没有老师，请先去添加！");
+            return;
+        }
+        System.out.println("老师工号\t\t姓名\t\t年龄\t\t授课科目");
         for (int i = 0; i < teachs.length; i++) {
             if (teachs[i] == null) {
-               continue;
+                continue;
             }
-            index++;
+            System.out.println(teachs[i].getID() + "\t\t" + teachs[i].getName() + "\t\t" + teachs[i].getAge() + "\t\t" + teachs[i].getSubject());
         }
-        if (index == -1) {
-            System.out.println("当前系统还没有老师，请先去添加！");
-        } else {
-            System.out.println("老师工号\t\t姓名\t\t年龄\t\t授课科目");
-            for (int i = 0; i < teachs.length; i++) {
-                if (teachs[i] == null) {
-                    continue;
-                }
-                System.out.println(teachs[i].getID() + "\t\t" + teachs[i].getName() + "\t\t" + teachs[i].getAge() + "\t\t" + teachs[i].getSubject());
-            }
-        }
+
     }
 
     private void updateTeacher() {
+        boolean isnull = arrIsNull();
+        if (isnull) {
+            System.out.println("当前系统中没有老师，请先去添加！");
+            return;
+        }
         String ID;
         int result;//检索的同时记录索引！避免后续进行重复遍历！
         while (true) {
@@ -101,7 +101,13 @@ public class TeacherController {
     }
 
     private void deleteTeacher() {
-        String ID;int result;
+        boolean isnull = arrIsNull();
+        if (isnull) {
+            System.out.println("当前系统中没有老师，请先去添加！");
+            return;
+        }
+        String ID;
+        int result;
         while (true) {
             System.out.println("请输入要删除的老师的工号:");
             ID = sc.next();
@@ -113,7 +119,7 @@ public class TeacherController {
                 System.out.println("* * * *该工号不存在，请重新输入！* * * *");
             }
         }
-        Boolean booolean =teacherService.deleteTeacher(result);
+        Boolean booolean = teacherService.deleteTeacher(result);
         if (booolean) {
             System.out.println("删除成功");
         } else {
@@ -149,6 +155,22 @@ public class TeacherController {
             System.out.println("添加成功");
         } else {
             System.out.println("添加失败");
+        }
+    }
+
+    private boolean arrIsNull() {
+        Teacher[] teachs = teacherService.allTeachers();
+        int index = -1;
+        for (int i = 0; i < teachs.length; i++) {
+            if (teachs[i] == null) {
+                continue;
+            }
+            index++;
+        }
+        if (index == -1) {
+            return true;
+        } else {
+            return false;
         }
     }
 }

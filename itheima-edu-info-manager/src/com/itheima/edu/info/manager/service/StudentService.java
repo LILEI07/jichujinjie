@@ -14,7 +14,6 @@ public class StudentService {
     StudentDao studentDao = new StudentDao();
 
     public Boolean addStudent(Student student) {
-
         return studentDao.addStudent(student);
     }
 

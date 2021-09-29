@@ -50,6 +50,12 @@ public class StudentController {
     }
 
     private void updateStudent() {
+        //查看当前所有学生并打印
+        boolean isnull = arrIsNull();
+        if (isnull) {
+            System.out.println("当前系统没有学生，请先去添加");
+            return;
+        }
         String ID;
         int result;//检索的同时记录索引！避免后续进行重复遍历！
         while (true) {
@@ -80,6 +86,11 @@ public class StudentController {
     }
 
     private void deleteStudent() {
+        boolean isnull = arrIsNull();
+        if (isnull) {
+            System.out.println("当前系统没有学生，请先去添加");
+            return;
+        }
         String ID;
         while (true) {
             System.out.println("请输入要删除学生的学号：");
@@ -101,32 +112,23 @@ public class StudentController {
     }
 
     private void retrieveStudent() {
-        //查看当前所有学生并打印
+        boolean isnull = arrIsNull();
+        if (isnull) {
+            System.out.println("当前系统没有学生，请先去添加");
+            return;
+        }
         Student[] stus = studentService.retrieveStudent();
-        //遍历是否全为空
-        int index = 0;
+        System.out.println("学号\t\t姓名\t\t年龄\t\t生日");
         for (int i = 0; i < stus.length; i++) {
             if (stus[i] == null) {
                 continue;
             }
-            index++;
-        }
-        //输出结果
-        if (index == 0) {
-            System.out.println("当前系统还没有学生，请先去添加！");
-        } else {
-            System.out.println("学号\t\t姓名\t\t年龄\t\t生日");
-            for (int i = 0; i < stus.length; i++) {
-                if (stus[i] == null) {
-                    continue;
-                }
-                System.out.println(stus[i].getID() + "\t\t" + stus[i].getName() + "\t\t" + stus[i].getAge() + "\t\t" + stus[i].getBirthday());
-            }
+            System.out.println(stus[i].getID() + "\t\t" + stus[i].getName() + "\t\t" + stus[i].getAge() + "\t\t" + stus[i].getBirthday());
         }
     }
 
-    private void addStudent() {
 
+    private void addStudent() {
         String ID;
         while (true) {
             System.out.println("请输入学生ID:");
@@ -154,5 +156,49 @@ public class StudentController {
         } else {
             System.out.println("添加失败");
         }
+    }
+
+    private boolean arrIsNull() {
+        //查看当前所有学生并打印
+        Student[] stus = studentService.retrieveStudent();
+        //遍历是否全为空
+        int index = -1;
+        for (int i = 0; i < stus.length; i++) {
+            if (stus[i] == null) {
+                continue;
+            }
+            index++;
+        }
+        //输出结果
+        if (index == -1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private Student addstudate() {
+        String ID;
+        int result;//检索的同时记录索引！避免后续进行重复遍历！
+        while (true) {
+            System.out.println("请输入要修改的学生的学号：");
+            ID = sc.next();
+            result = studentService.fandID(ID);
+            if (result != -1) {
+                System.out.println("* * * *学号验证通过！* * * *");
+                break;
+            } else {
+                System.out.println("* * * *学号不存在，请核对后重新输入！* * * *");
+            }
+        }
+        System.out.println("请输入学生姓名:");
+        String name = sc.next();
+        System.out.println("请输入学生年龄:");
+        String age = sc.next();
+        System.out.println("请输入学生生日:");
+        String birthday = sc.next();
+        //封装对象
+        Student student = new Student(ID, name, age, birthday);
+        return student;
     }
 }
