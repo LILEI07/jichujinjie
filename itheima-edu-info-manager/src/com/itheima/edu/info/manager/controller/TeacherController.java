@@ -55,12 +55,12 @@ public class TeacherController {
             System.out.println("当前系统中没有老师，请先去添加！");
             return;
         }
-        System.out.println("老师工号\t\t姓名\t\t年龄\t\t授课科目");
+        System.out.println("老师工号\t\t姓名\t\t年龄\t\t生日");
         for (int i = 0; i < teachs.length; i++) {
             if (teachs[i] == null) {
                 continue;
             }
-            System.out.println(teachs[i].getID() + "\t\t" + teachs[i].getName() + "\t\t" + teachs[i].getAge() + "\t\t" + teachs[i].getSubject());
+            System.out.println(teachs[i].getID() + "\t\t" + teachs[i].getName() + "\t\t" + teachs[i].getAge() + "\t\t" + teachs[i].getBirthday());
         }
 
     }

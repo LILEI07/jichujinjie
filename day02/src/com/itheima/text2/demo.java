@@ -5,6 +5,7 @@ package com.itheima.text2;
 @Version：1.0
 @Description：
 子类对象创建时，会先去创建父类的空参构造方法！
+
 */
 
 public class demo {

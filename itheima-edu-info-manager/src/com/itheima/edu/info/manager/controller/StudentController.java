@@ -69,15 +69,8 @@ public class StudentController {
                 System.out.println("* * * *学号不存在，请核对后重新输入！* * * *");
             }
         }
-        System.out.println("请输入学生姓名:");
-        String name = sc.next();
-        System.out.println("请输入学生年龄:");
-        String age = sc.next();
-        System.out.println("请输入学生生日:");
-        String birthday = sc.next();
-        //封装对象
-        Student student = new Student(ID, name, age, birthday);
-        Boolean booolean = studentService.updateStudent(student, result);
+        Student makestudent = makestudent(ID);
+        Boolean booolean = studentService.updateStudent(makestudent, result);
         if (booolean) {
             System.out.println("修改成功");
         } else {
@@ -119,14 +112,13 @@ public class StudentController {
         }
         Student[] stus = studentService.retrieveStudent();
         System.out.println("学号\t\t姓名\t\t年龄\t\t生日");
-        for (int i = 0; i < stus.length; i++) {
-            if (stus[i] == null) {
+        for (Student student : stus) {
+            if (student == null) {
                 continue;
             }
-            System.out.println(stus[i].getID() + "\t\t" + stus[i].getName() + "\t\t" + stus[i].getAge() + "\t\t" + stus[i].getBirthday());
+            System.out.println(student.getID() + "\t\t" + student.getName() + "\t\t" + student.getAge() + "\t\t" + student.getBirthday());
         }
     }
-
 
     private void addStudent() {
         String ID;
@@ -141,16 +133,9 @@ public class StudentController {
                 break;
             }
         }
-        System.out.println("请输入学生姓名:");
-        String name = sc.next();
-        System.out.println("请输入学生年龄:");
-        String age = sc.next();
-        System.out.println("请输入学生生日:");
-        String birthday = sc.next();
-        //封装对象
-        Student student = new Student(ID, name, age, birthday);
+        Student makestudent = makestudent(ID);
         //调用方法
-        Boolean result = studentService.addStudent(student);
+        Boolean result = studentService.addStudent(makestudent);
         if (result) {
             System.out.println("添加成功");
         } else {
@@ -163,34 +148,17 @@ public class StudentController {
         Student[] stus = studentService.retrieveStudent();
         //遍历是否全为空
         int index = -1;
-        for (int i = 0; i < stus.length; i++) {
-            if (stus[i] == null) {
+        for (Student student : stus) {
+            if (student == null) {
                 continue;
             }
             index++;
         }
         //输出结果
-        if (index == -1) {
-            return true;
-        } else {
-            return false;
-        }
+        return index == -1;
     }
 
-    private Student addstudate() {
-        String ID;
-        int result;//检索的同时记录索引！避免后续进行重复遍历！
-        while (true) {
-            System.out.println("请输入要修改的学生的学号：");
-            ID = sc.next();
-            result = studentService.fandID(ID);
-            if (result != -1) {
-                System.out.println("* * * *学号验证通过！* * * *");
-                break;
-            } else {
-                System.out.println("* * * *学号不存在，请核对后重新输入！* * * *");
-            }
-        }
+    private Student makestudent(String id){
         System.out.println("请输入学生姓名:");
         String name = sc.next();
         System.out.println("请输入学生年龄:");
@@ -198,7 +166,6 @@ public class StudentController {
         System.out.println("请输入学生生日:");
         String birthday = sc.next();
         //封装对象
-        Student student = new Student(ID, name, age, birthday);
-        return student;
+        return new Student(id, name, age, birthday);
     }
 }
