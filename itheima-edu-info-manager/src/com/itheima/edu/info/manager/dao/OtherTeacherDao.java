@@ -11,7 +11,7 @@ import com.itheima.edu.info.manager.domain.Teacher;
 
 import java.util.ArrayList;
 
-public class OtherTeacherDao {
+public class OtherTeacherDao implements BaseTeacherDao{
   
     static ArrayList<Teacher> arrtechs = new ArrayList<>();
 
@@ -24,6 +24,7 @@ public class OtherTeacherDao {
         arrtechs.add(t3);
     }
 
+    @Override
     public Teacher[] allTeachers() {
         Teacher[] techs = new Teacher[arrtechs.size()];
         for (int i = 0; i < techs.length; i++) {
@@ -33,16 +34,19 @@ public class OtherTeacherDao {
         return techs;
     }
 
+    @Override
     public Boolean addTeacher(Teacher teacher) {
         arrtechs.add(teacher);
         return true;
     }
 
+    @Override
     public Boolean updateTeacher(Teacher teacher, int result) {
         arrtechs.set(result, teacher);
         return true;
     }
 
+    @Override
     public Boolean deleteTeacher(int id) {
         arrtechs.remove(id);
         return true;

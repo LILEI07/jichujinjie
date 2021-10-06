@@ -9,14 +9,16 @@ package com.itheima.edu.info.manager.dao;
 
 import com.itheima.edu.info.manager.domain.Teacher;
 
-public class TeacherDao {
+public class TeacherDao implements BaseTeacherDao{
     Teacher[] techs = new Teacher[5];
 
 
+    @Override
     public Teacher[] allTeachers() {
         return techs;
     }
 
+    @Override
     public Boolean addTeacher(Teacher teacher) {
         int index = -1;
         for (int i = 0; i < techs.length; i++) {
@@ -33,11 +35,13 @@ public class TeacherDao {
         }
     }
 
+    @Override
     public Boolean updateTeacher(Teacher teacher, int result) {
         techs[result] = teacher;
         return true;
     }
 
+    @Override
     public Boolean deleteTeacher(int id) {
         techs[id] = null;
         return true;

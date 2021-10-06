@@ -7,13 +7,15 @@ package com.itheima.edu.info.manager.factory;
 
 */
 
-import com.itheima.edu.info.manager.dao.BaseStudentDao;
-import com.itheima.edu.info.manager.dao.OtherStudentDao;
-import com.itheima.edu.info.manager.dao.StudentDao;
+import com.itheima.edu.info.manager.dao.*;
 
 public class factory {
     public static BaseStudentDao getStudentdao() {
           return new OtherStudentDao();
         //return new StudentDao();
+    }
+    public static BaseTeacherDao getTeacherDao() {
+        return new OtherTeacherDao();
+        //return new TeacherDao();
     }
 }

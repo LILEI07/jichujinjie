@@ -13,14 +13,14 @@ import com.itheima.edu.info.manager.factory.factory;
 
 public class StudentService {
     // OtherStudentDao studentDao = new OtherStudentDao();
-    BaseStudentDao baseStudentDao = factory.getStudentdao();
+    BaseStudentDao studentDao = factory.getStudentdao();
 
     public Boolean addStudent(Student student) {
-        return baseStudentDao.addStudent(student);
+        return studentDao.addStudent(student);
     }
 
     public int fandID(String id) {
-        Student[] suts = baseStudentDao.allStudent();
+        Student[] suts = studentDao.allStudent();
         int index = -1;
         for (int i = 0; i < suts.length; i++) {
             if (suts[i] != null && suts[i].getID().equals(id)) {
@@ -32,15 +32,15 @@ public class StudentService {
     }
 
     public Student[] retrieveStudent() {
-        return baseStudentDao.allStudent();
+        return studentDao.allStudent();
     }
 
     public boolean deleteStudent(String ID) {
-        return baseStudentDao.deleteStudent(ID);
+        return studentDao.deleteStudent(ID);
     }
 
 
     public Boolean updateStudent(Student student, int result) {
-        return baseStudentDao.updateStudent(student, result);
+        return studentDao.updateStudent(student, result);
     }
 }

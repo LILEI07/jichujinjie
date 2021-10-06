@@ -7,13 +7,17 @@ package com.itheima.edu.info.manager.service;
 
 */
 
+import com.itheima.edu.info.manager.dao.BaseStudentDao;
+import com.itheima.edu.info.manager.dao.BaseTeacherDao;
 import com.itheima.edu.info.manager.dao.OtherTeacherDao;
 import com.itheima.edu.info.manager.dao.TeacherDao;
 import com.itheima.edu.info.manager.domain.Teacher;
+import com.itheima.edu.info.manager.factory.factory;
 
 public class TeacherService {
 
-    OtherTeacherDao teacherDao = new OtherTeacherDao();
+    BaseTeacherDao teacherDao = factory.getTeacherDao();
+    // OtherTeacherDao teacherDao = new OtherTeacherDao();
 
     public Boolean updateTeacher(Teacher teacher, int result) {
         return teacherDao.updateTeacher(teacher, result);
@@ -27,7 +31,7 @@ public class TeacherService {
         Teacher[] techs = allTeachers();
         int index = -1;
         for (int i = 0; i < techs.length; i++) {
-            if (techs[i]!=null&&techs[i].getID().equals(id)) {
+            if (techs[i] != null && techs[i].getID().equals(id)) {
                 index = i;
             }
         }
