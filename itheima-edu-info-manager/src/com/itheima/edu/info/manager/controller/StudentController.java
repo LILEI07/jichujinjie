@@ -111,7 +111,7 @@ public class StudentController {
             return;
         }
         Student[] stus = studentService.retrieveStudent();
-        System.out.println("学号\t\t姓名\t\t年龄\t\t生日");
+        System.out.println("学号\t\t\t\t姓名\t\t年龄\t\t生日");
         for (Student student : stus) {
             if (student == null) {
                 continue;
@@ -158,7 +158,7 @@ public class StudentController {
         return index == -1;
     }
 
-    private Student makestudent(String id){
+    private Student makestudent(String id) {
         System.out.println("请输入学生姓名:");
         String name = sc.next();
         System.out.println("请输入学生年龄:");

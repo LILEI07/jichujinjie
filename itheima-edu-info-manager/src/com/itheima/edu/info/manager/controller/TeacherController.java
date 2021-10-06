@@ -55,7 +55,7 @@ public class TeacherController {
             System.out.println("当前系统中没有老师，请先去添加！");
             return;
         }
-        System.out.println("老师工号\t\t姓名\t\t年龄\t\t生日");
+        System.out.println("老师工号\t\t\t\t姓名\t\t年龄\t\t生日");
         for (int i = 0; i < teachs.length; i++) {
             if (teachs[i] == null) {
                 continue;
@@ -71,12 +71,12 @@ public class TeacherController {
             System.out.println("当前系统中没有老师，请先去添加！");
             return;
         }
-        String ID;
+        String upID;
         int result;//检索的同时记录索引！避免后续进行重复遍历！
         while (true) {
             System.out.println("请输入要修改的老师的教职工号：");
-            ID = sc.next();
-            result = teacherService.fandTeacherID(ID);
+            upID = sc.next();
+            result = teacherService.fandTeacherID(upID);
             if (result != -1) {
                 System.out.println("* * * *工号验证通过！* * * *");
                 break;
@@ -91,7 +91,7 @@ public class TeacherController {
         System.out.println("请输入老师的学科:");
         String subject = sc.next();
         //封装对象
-        Teacher teacher = new Teacher(ID, name, age, subject);
+        Teacher teacher = new Teacher(upID, name, age, subject);
         Boolean booolean = teacherService.updateTeacher(teacher, result);
         if (booolean) {
             System.out.println("修改成功");

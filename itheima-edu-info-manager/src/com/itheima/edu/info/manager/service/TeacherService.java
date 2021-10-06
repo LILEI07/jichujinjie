@@ -7,12 +7,13 @@ package com.itheima.edu.info.manager.service;
 
 */
 
+import com.itheima.edu.info.manager.dao.OtherTeacherDao;
 import com.itheima.edu.info.manager.dao.TeacherDao;
 import com.itheima.edu.info.manager.domain.Teacher;
 
 public class TeacherService {
 
-    TeacherDao teacherDao = new TeacherDao();
+    OtherTeacherDao teacherDao = new OtherTeacherDao();
 
     public Boolean updateTeacher(Teacher teacher, int result) {
         return teacherDao.updateTeacher(teacher, result);

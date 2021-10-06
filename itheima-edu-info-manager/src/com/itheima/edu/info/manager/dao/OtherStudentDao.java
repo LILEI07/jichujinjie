@@ -9,57 +9,47 @@ package com.itheima.edu.info.manager.dao;
 
 import com.itheima.edu.info.manager.domain.Student;
 
-public class StudentDao implements BaseStudentDao {
+import java.util.ArrayList;
 
-    static Student[] stus = new Student[5];
+public class OtherStudentDao implements BaseStudentDao {
+
+
+    static ArrayList<Student> arrstus = new ArrayList<>();
 
     static {
         Student s1 = new Student("heima001", "张三", "23", "2020-01-06");
         Student s2 = new Student("heima002", "李四", "24", "2021-04-04");
         Student s3 = new Student("heima003", "王五", "25", "2020-02-08");
-        stus[0] = s1;
-        stus[1] = s2;
-        stus[2] = s3;
+        arrstus.add(s1);
+        arrstus.add(s2);
+        arrstus.add(s3);
+
     }
 
     @Override
     public Boolean addStudent(Student student) {
-
-        int index = -1;
-        for (int i = 0; i < stus.length; i++) {
-            if (stus[i] == null) {
-                index = i;
-                break;
-            }
-        }
-        if (index == -1) {
-            return false;
-        } else {
-            stus[index] = student;
-            return true;
-        }
+        arrstus.add(student);
+        return true;
     }
 
     @Override
     public Student[] allStudent() {
-
+        Student[] stus = new Student[arrstus.size()];
+        for (int i = 0; i < stus.length; i++) {
+            stus[i] = arrstus.get(i);
+        }
         return stus;
     }
 
     @Override
     public boolean deleteStudent(String id) {
-        for (int i = 0; i < stus.length; i++) {
-            if (stus[i].getID().equals(id)) {
-                stus[i] = null;
-                break;
-            }
-        }
+        arrstus.remove(id);
         return true;
     }
 
     @Override
     public Boolean updateStudent(Student student, int result) {
-        stus[result] = student;
+        arrstus.set(result, student);
         return true;
     }
 }
