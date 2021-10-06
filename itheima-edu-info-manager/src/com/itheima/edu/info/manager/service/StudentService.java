@@ -7,19 +7,20 @@ package com.itheima.edu.info.manager.service;
 
 */
 
-import com.itheima.edu.info.manager.dao.OtherStudentDao;
-import com.itheima.edu.info.manager.dao.StudentDao;
+import com.itheima.edu.info.manager.dao.BaseStudentDao;
 import com.itheima.edu.info.manager.domain.Student;
+import com.itheima.edu.info.manager.factory.factory;
 
 public class StudentService {
-    OtherStudentDao studentDao = new OtherStudentDao();
+    // OtherStudentDao studentDao = new OtherStudentDao();
+    BaseStudentDao baseStudentDao = factory.getStudentdao();
 
     public Boolean addStudent(Student student) {
-        return studentDao.addStudent(student);
+        return baseStudentDao.addStudent(student);
     }
 
     public int fandID(String id) {
-        Student[] suts = studentDao.allStudent();
+        Student[] suts = baseStudentDao.allStudent();
         int index = -1;
         for (int i = 0; i < suts.length; i++) {
             if (suts[i] != null && suts[i].getID().equals(id)) {
@@ -31,15 +32,15 @@ public class StudentService {
     }
 
     public Student[] retrieveStudent() {
-        return studentDao.allStudent();
+        return baseStudentDao.allStudent();
     }
 
     public boolean deleteStudent(String ID) {
-        return studentDao.deleteStudent(ID);
+        return baseStudentDao.deleteStudent(ID);
     }
 
 
     public Boolean updateStudent(Student student, int result) {
-        return studentDao.updateStudent(student, result);
+        return baseStudentDao.updateStudent(student, result);
     }
 }
